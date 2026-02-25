@@ -34,6 +34,7 @@ namespace CarAPI.Controllers
     [ApiController]
     public class CarsController : ControllerBase
     {
+        private string connectionString = "Data Source=localhost;Initial Catalog=master;User ID=sa;Password=!Password;Trust Server Certificate=True";
         private string createTable = "CREATE TABLE Cars (licenseplate VARCHAR(16),make VARCHAR(128),model VARCHAR(128),color VARCHAR(128),PRIMARY KEY (licenseplate))";
         // GET: api/Car
         /// <summary>
@@ -47,7 +48,7 @@ namespace CarAPI.Controllers
         [HttpGet]
         public IActionResult Get_ThisNameDoesNotMatter(string? make = "%", string? color = "%")
         {
-            using (var connection = new SqlConnection(System.Environment.GetEnvironmentVariable("ConnectionString")))
+            using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 try
@@ -98,7 +99,7 @@ namespace CarAPI.Controllers
         [HttpGet("{licenseplate}")]
         public IActionResult GetByLicenceplate(string licenseplate)
         {
-            using (var connection = new SqlConnection(System.Environment.GetEnvironmentVariable("ConnectionString")))
+            using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 try
@@ -124,7 +125,7 @@ namespace CarAPI.Controllers
                 model = iModel,
                 color = iColor
             };
-            using (var connection = new SqlConnection(System.Environment.GetEnvironmentVariable("ConnectionString")))
+            using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 try

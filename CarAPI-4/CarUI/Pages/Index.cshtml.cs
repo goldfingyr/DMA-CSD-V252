@@ -27,6 +27,7 @@ namespace UI.Pages
         [BindProperty]
         public List<Car> Cars { get; set; }
 
+
         private void SetMyCookie(string carSelected)
         {
             var cookieOptions = new CookieOptions();
@@ -66,6 +67,20 @@ namespace UI.Pages
             GetMyCookie();
             if (CarSelectedLicenceplate != null)
             {
+                // Now use API
+                HttpClient httpClient = new HttpClient();
+                httpClient.BaseAddress = new Uri(APIURI);
+                string result = httpClient.GetStringAsync("/apiV4/Cars/" + CarSelectedLicenceplate).Result;
+                if (result != null)
+                {
+                    // we have a result
+                    CarSelected = JsonConvert.DeserializeObject<Car>(result);
+                }
+                else
+                {
+                    CarSelected = null;
+                }
+
             }
         }
 
