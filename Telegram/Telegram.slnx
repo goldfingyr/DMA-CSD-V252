@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Telegram-OpenID/Telegram-OpenID.csproj" Id="86d2f567-a228-4438-ba5a-4f6ad436b7fa" />
+  <Project Path="Telegram/Telegram.csproj" />
+</Solution>
